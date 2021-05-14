@@ -1,5 +1,5 @@
 """
-idk 
+idk
 """
 # contains bunch of buggy examples
 # taken from https://hackernoon.com/10-common-security-gotchas
@@ -9,26 +9,28 @@ import subprocess
 import cPickle
 
 
-"""
-Input injection
-"""
+
 def transcode_file(request, filename):
-    command = 'ffmpeg -i "{source}" output_file.mpg'\
-    .format(source=filename)
+    """
+    Input injection
+    """
+    command = 'ffmpeg -i "{source}" output_file.mpg'.format(source=filename)
     subprocess.call(command, shell=True)  # a bad idea!
 
-"""
-# Assert statements
-"""
-def foo(request, user):
-    assert user.is_admin, 'user does not have access'
+
+def fooo(request, user):
+    """
+    # Assert statements
+    """
+    assert user.is_admin
     # secure code...
 
 
-"""
-Pickles
-"""
+
 class RunBinSh(object):
+    """
+    Pickles
+    """
     def __reduce__(self):
         return (subprocess.Popen, (('/bin/sh',),))
 
